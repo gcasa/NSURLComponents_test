@@ -10,13 +10,19 @@
 
 @interface AppDelegate ()
 
-@property (weak) IBOutlet NSWindow *window;
+@property (retain) IBOutlet NSWindow *window;
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
+    NSURLComponents *components = [NSURLComponents componentsWithURL:[NSURL URLWithString:@"https://some.host.com"] resolvingAgainstBaseURL:NO];
+        components.queryItems = @[
+            [NSURLQueryItem queryItemWithName:@"lang" value:@"en"],
+            [NSURLQueryItem queryItemWithName:@"response_type" value:@"code"]
+        ];
+    NSLog(@"%@", components.URL); // returns "https://some.host.com", without the query items
 }
 
 
