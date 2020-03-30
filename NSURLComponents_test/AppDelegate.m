@@ -19,8 +19,9 @@
     // Insert code here to initialize your application
     NSURLComponents *components = [NSURLComponents componentsWithURL:[NSURL URLWithString:@"https://some.host.com"] resolvingAgainstBaseURL:NO];
         components.queryItems = @[
-            [NSURLQueryItem queryItemWithName:@"lang" value:@"en"],
-            [NSURLQueryItem queryItemWithName:@"response_type" value:@"code"]
+                                  [NSURLQueryItem queryItemWithName:@"lang" value:@"en"],
+                                     [NSURLQueryItem queryItemWithName:@"response_type" value:@"code"],
+                                     [NSURLQueryItem queryItemWithName:@"uri" value:[NSURL URLWithString:@"https://some.url.com/path?param1=one&param2=two"].absoluteString]
         ];
     NSLog(@"%@", components.URL); // returns "https://some.host.com", without the query items
 }
