@@ -18,6 +18,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
     NSURLComponents *components = [NSURLComponents componentsWithURL:[NSURL URLWithString:@"https://some.host.com"] resolvingAgainstBaseURL:NO];
+    NSLog(@"%@", components.URL); 
         components.queryItems = @[
                                   [NSURLQueryItem queryItemWithName:@"lang" value:@"en"],
                                      [NSURLQueryItem queryItemWithName:@"response_type" value:@"code"],
@@ -27,7 +28,8 @@
     
     NSURLComponents *urlc = [[NSURLComponents alloc] init];
     [urlc setHost: @"myhost.com"];
-    NSLog(@"percentEncodedHost = %@",[urlc percentEncodedHost]);
+    NSLog(@"%@",[urlc percentEncodedHost]);
+    NSLog(@"%@",[components percentEncodedQuery] );
 }
 
 
