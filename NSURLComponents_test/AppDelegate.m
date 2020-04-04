@@ -32,21 +32,22 @@ void passTest(BOOL flag,
     // Insert code here to initialize your application
     NSURLComponents *components = [NSURLComponents componentsWithURL:[NSURL URLWithString:@"https://user:password@some.host.com"] resolvingAgainstBaseURL:NO];
     
-    passTest([[[components URL] absoluteString] isEqualToString: @"https://user:password@some.host.com"], @"Absolute URL string is correct");
-    
+    NSLog(@"%@",[[components URL] absoluteString]);
     components.queryItems = [NSArray arrayWithObjects:
                                 [NSURLQueryItem queryItemWithName:@"lang" value:@"en"],
                                     [NSURLQueryItem queryItemWithName:@"response_type" value:@"code"],
                                     [NSURLQueryItem queryItemWithName:@"uri" value:[NSURL URLWithString:@"https://some.url.com/path?param1=one&param2=two"].absoluteString],
                              nil];
     // URL
-    passTest([[components string] isEqualToString:              @"https://user:password@some.host.com?lang=en&response_type=code&uri=https://some.url.com/path?param1%3Done%26param2%3Dtwo"],
+    passTest([[components string] isEqualToString:
+             @"https://user:password@some.host.com/?lang=en&response_type=code&uri=https://some.url.com/path?param1%3Done%26param2%3Dtwo"],
              @"URL string is correct");
-    
+    NSLog(@"%@", [components string]);
     // encoded...
     passTest([[components percentEncodedQuery] isEqualToString:
               @"lang=en&response_type=code&uri=https://some.url.com/path?param1%3Done%26param2%3Dtwo"],
              @"percentEncodedQuery is correct");
+    NSLog(@"%@",[components percentEncodedQuery]);
     passTest([[components percentEncodedHost] isEqualToString:
               @"some.host.com"],
              @"percentEncodedHost is correct");
@@ -61,6 +62,7 @@ void passTest(BOOL flag,
     passTest([[components query] isEqualToString:
               @"lang=en&response_type=code&uri=https://some.url.com/path?param1=one&param2=two"],
              @"query is correct");
+    
     passTest([[components host] isEqualToString:
               @"some.host.com"],
              @"host is correct");
